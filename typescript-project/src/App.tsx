@@ -1,30 +1,12 @@
-import { useEffect, useState } from "react";
-import { items } from "./mock-data";
+import React from "react";
+import { Outlet } from "react-router-dom";
+import "./index.css";
+import ShoppingList from "./shopping-list/ShoppingList";
 
 export default function () {
-
-  const [allItems, setAllitems] = useState<object[]>([])
-
-  useEffect(()=>{
-    setAllitems(items)
-  },[items])
-
-  const listItems = allItems.map(item => {
-    return(
-      <li key={item.name} className="
-      flex items-center justify-between
-       py-2">
-        <span
-          onClick={() => {console.log("click1")}}
-        >
-          {item.ingredients}
-        </span>
-        <button onClick={() => {console.log("click2")}}>X</button>
-      </li>
-    )
-  })
-
   return (
-    <section>{listItems}</section>
+    <>
+      <Outlet/>
+    </>
   );
 }

@@ -1,5 +1,6 @@
+import React from 'react';
 import { useEffect, useState } from "react";
-import { items } from "../../../server/mock-data";
+import { items } from "../../server/mock-data";
 
 interface Item {
   name: string;

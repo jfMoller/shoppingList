@@ -3,17 +3,19 @@ import { useEffect, useState } from "react";
 import { items } from "../../server/mock-data";
 
 interface Item {
+  _id: string;
   name: string;
   ingredients: string[];
   category: string;
   price: number;
+  isCompleted: boolean;
 }
 
 export default function ShoppingList() {
   const [allItems, setAllItems] = useState<Item[]>([]);
   useEffect(() => {
     setAllItems(items);
-  }, []);
+  }, [items]);
 
   function addItem(event: React.MouseEvent<HTMLButtonElement>) {
     event.preventDefault();
@@ -21,16 +23,19 @@ export default function ShoppingList() {
   }
   function toggleItem(event: React.MouseEvent<HTMLSpanElement>, _id: string) {
     event.preventDefault();
-    const updatedItems = allItems.map((item) => {
-      if (!item.isCompleted) {
-        return { ...item, isCompleted: true };
-      } else {
-        return { ...item, isCompleted: false };
+    let updatedItems = allItems.map((item) => {
+      if (item._id === _id) {
+        if (!item.isCompleted) {
+          return { ...item, isCompleted: true };
+        } else {
+          return { ...item, isCompleted: false };
+        }
       }
+      return item;
     });
     setAllItems(updatedItems);
-    console.log(allItems)
   }
+
   function editItem(event: React.MouseEvent<HTMLElement>) {
     event.preventDefault();
     console.log("edit item");
@@ -41,7 +46,7 @@ export default function ShoppingList() {
   }
 
   const listItems = allItems.map((item) => {
-    const itemClass = (item.IsCompleted)
+    const itemClass = item.isCompleted
       ? "flex-1 cursor-pointer hover:text-blue-500 w-5 line-through text-gray-400"
       : "flex-1 cursor-pointer hover:text-blue-500 w-5";
 

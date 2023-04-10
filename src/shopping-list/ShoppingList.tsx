@@ -36,9 +36,18 @@ export default function ShoppingList() {
     setAllItems(updatedItems);
   }
 
-  function editItem(event: React.MouseEvent<HTMLElement>) {
+  function editItem(event: React.MouseEvent<HTMLElement>, _id: string) {
     event.preventDefault();
-    console.log("edit item");
+    let updatedItems = allItems.map((item) => {
+      if (item._id === _id) {
+        let input = prompt("Enter a new item: ");
+        if (input !== "" && input !== " " && input !== null) {
+          return { ...item, name: input };
+        }
+      }
+      return item;
+    });
+    setAllItems(updatedItems);
   }
   function removeItem(event: React.MouseEvent<HTMLElement>) {
     event.preventDefault();
@@ -63,7 +72,7 @@ export default function ShoppingList() {
         </span>
         <button
           className="ml-4 text-sm font-semibold text-green-500 hover:text-green-700 transition-colors duration-200 ease-in-out"
-          onClick={editItem}
+          onClick={(event) => editItem(event, item._id)}
         >
           <i className="fa-solid fa-pen-to-square"></i>
         </button>

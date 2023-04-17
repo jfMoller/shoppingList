@@ -8,7 +8,7 @@ interface Item {
   isCompleted: boolean;
 }
 
-export default function ShoppingList() {
+export default function() {
   const [allItems, setAllItems] = useState<Item[]>([]);
   const [inputValue, setInputValue] = useState<string>("");
 

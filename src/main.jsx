@@ -10,6 +10,7 @@ import "./index.css";
 import App from "./App";
 import HomePage from "./homepage/HomePage";
 import ShoppingList from "./shopping-list/ShoppingList"
+import Calender from "./calender/Calender"
 
 
 const router = createBrowserRouter(
@@ -17,6 +18,7 @@ const router = createBrowserRouter(
     <Route path="/" element={<App />}>
       <Route index element={<HomePage />} />
       <Route path={"/shopping-list"} element={<ShoppingList />} />
+      <Route path={"/calender"} element={<Calender />} />
     </Route>
   )
 );
